@@ -20,6 +20,12 @@ public class Member extends BaseEntity{
 
     private Integer age;
 
+    public Member() {
+    }
 
-
+    public Member(String userName, String password, Integer age) {
+        this.userName = userName;
+        this.password = password;
+        this.age = age;
+    }
 }
