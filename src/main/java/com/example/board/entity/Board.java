@@ -21,4 +21,16 @@ public class Board extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
+    public Board() {
+    }
+
+    public Board(String title, String contents) {
+        this.title = title;
+        this.contents = contents;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 }
