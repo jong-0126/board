@@ -1,6 +1,7 @@
 package com.example.board.controller;
 
 import com.example.board.dto.board.BoardResponseDto;
+import com.example.board.dto.board.BoardWithAgeResponseDto;
 import com.example.board.dto.board.CreateBoardRequestDto;
 import com.example.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +22,9 @@ public class BoardController {
     @PostMapping
     public ResponseEntity<BoardResponseDto> save(@RequestBody CreateBoardRequestDto requestDto){
 
-        boardService.save(requestDto.getTitle(), requestDto.getContents(), requestDto.getUserName());
+        BoardResponseDto saved = boardService.save(requestDto.getTitle(), requestDto.getContents(), requestDto.getUserName());
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
     //전체 게시글 조회
@@ -33,6 +34,15 @@ public class BoardController {
         List<BoardResponseDto> boardResponseDtoList = boardService.findAll();
 
         return new ResponseEntity<>(boardResponseDtoList, HttpStatus.OK);
+    }
+
+    //특정 게시글 조회
+    @GetMapping("/{id}")
+    public ResponseEntity<BoardWithAgeResponseDto> findById(@PathVariable Long id){
+
+        BoardWithAgeResponseDto dto = boardService.findById(id);
+
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
 }
