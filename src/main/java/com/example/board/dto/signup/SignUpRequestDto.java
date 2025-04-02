@@ -1,4 +1,4 @@
-package com.example.board.dto;
+package com.example.board.dto.signup;
 
 import lombok.Getter;
 
