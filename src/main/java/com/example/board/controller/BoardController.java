@@ -22,9 +22,9 @@ public class BoardController {
     @PostMapping
     public ResponseEntity<BoardResponseDto> save(@RequestBody CreateBoardRequestDto requestDto){
 
-        BoardResponseDto saved = boardService.save(requestDto.getTitle(), requestDto.getContents(), requestDto.getUserName());
+        BoardResponseDto boardResponseDto = boardService.save(requestDto.getTitle(), requestDto.getContents(), requestDto.getUserName());
 
-        return new ResponseEntity<>(saved, HttpStatus.CREATED);
+        return new ResponseEntity<>(boardResponseDto, HttpStatus.CREATED);
     }
 
     //전체 게시글 조회
@@ -40,9 +40,18 @@ public class BoardController {
     @GetMapping("/{id}")
     public ResponseEntity<BoardWithAgeResponseDto> findById(@PathVariable Long id){
 
-        BoardWithAgeResponseDto dto = boardService.findById(id);
+        BoardWithAgeResponseDto boardWithAgeResponseDto = boardService.findById(id);
 
-        return new ResponseEntity<>(dto, HttpStatus.OK);
+        return new ResponseEntity<>(boardWithAgeResponseDto, HttpStatus.OK);
+    }
+
+    //특정 게시글 삭제
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+
+        boardService.delete(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
